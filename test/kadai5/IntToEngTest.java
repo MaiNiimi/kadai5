@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 
 public class IntToEngTest extends IntToEng {
-	
+
 	//一桁の値のテスト
 	@Test
 	public void 一桁の値0を入力した結果が取得できる() {
@@ -44,6 +44,7 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(30);
 		assertThat(actual, is(expected));
 	}
+	
 	@Test
 	public void 二桁の値52を入力した結果が取得できる() {
 		IntToEng ite = new IntToEng();
@@ -89,6 +90,8 @@ public class IntToEngTest extends IntToEng {
 		assertThat(actual, is(expected));
 	}
 	
+	
+	//四桁の値のテスト
 	@Test
 	public void 四桁の値1000を入力した結果が取得できる() {
 		IntToEng ite = new IntToEng();
@@ -103,7 +106,28 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(1006);
 		assertThat(actual, is(expected));
 	}
-	/*
+	@Test
+	public void 四桁の値1016を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand sixteen";
+		String actual = ite.translateEng(1016);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値1106を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand one hundred six";
+		String actual = ite.translateEng(1106);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値1011を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand eleven";
+		String actual = ite.translateEng(1011);
+		assertThat(actual, is(expected));
+	}
+	
 	@Test
 	public void 四桁の値1012を入力した結果が取得できる() {
 		IntToEng ite = new IntToEng();
@@ -125,5 +149,4 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(6284);
 		assertThat(actual, is(expected));
 	}
-	*/
 }
