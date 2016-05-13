@@ -20,36 +20,71 @@ public class IntToEng {
     //何桁かを判断するメソッド
     static String translatedEng(int n){
     	String result = "";
-    	if(n/1000 == 0){
-    		int sanketa = n % 1000;
-    		int hundred = sanketa/100;
-    		result = translatedEngHundred(sanketa, hundred);
-    	}
-    	if(n/100 == 0){
+    	if(n/10 == 0) result = translatedEngOne(n%10);
+    	else if(n/100 == 0){
     		int futaketa = n % 100;
     		int ten = futaketa / 10;
     		result = translatedEngTen(futaketa, ten);
+    	}else if(n/1000 == 0){
+    		int sanketa = n % 1000;
+    		int hundred = sanketa/100;
+    		result = translatedEngHundred(sanketa, hundred);
+    	}else if(n/10000 == 0){
+    		int yonketa = n % 10000;
+    		int thousand = yonketa/1000;
+    		result = translatedEngThousand(yonketa, thousand);
     	}
-    	if(n/10 == 0) result = translatedEngOne(n%10);
     	return result;
     }
-    //百の位を処理するメソッド
+    //四桁の数を処理するメソッド
+    static String translatedEngThousand(int yonketa, int thousand){
+    	String result = "";
+    	String resultThousand = "";
+    	String resultHundred = "";
+    	resultThousand = translatedEngOne(thousand) + " thousand";
+    	int sanketa = yonketa % 1000;
+    	int hundred = sanketa / 100;
+    	if(sanketa == 0) result = resultThousand;
+    	else{
+    		resultHundred = translatedEngHundred(sanketa, hundred);
+    		result = resultThousand + " " + resultHundred;
+    	}
+    	return result;
+    }
+    //三桁の数を処理するメソッド
     static String translatedEngHundred(int sanketa, int hundred){
     	String result = "";
     	String resultHundred = "";
     	String resultTen = "";
-    	resultHundred = translatedEngOne(hundred) + " hundred";
-    	int futaketa = sanketa % 10;
+    	String resultOne= "";
+
+    	if(hundred == 0){
+    		resultHundred = "";
+    	} else {
+    		resultHundred = translatedEngOne(hundred) + " hundred";
+    	}
+    	
+    	int futaketa = sanketa % 100;
     	if(futaketa == 0) result = resultHundred;
     	else{
     		int ten = futaketa/10;
-    		resultTen = translatedEngTen(sanketa % 10, ten);
-    		result = resultHundred + " " + resultTen;
+    		if(ten == 0){
+    			resultOne = translatedEngOne(futaketa % 10);
+    			result = resultHundred + " " + resultOne;
+    		}else{
+    			resultTen = translatedEngTen(futaketa, ten);
+    			if(resultTen.equals("0")){
+        			result = resultHundred;
+        		}else{
+        			result = resultHundred + " " + resultTen;
+        		}
+    			result = resultHundred + " " + resultTen;
+    		}
     	}
     	return result;
     }
 
-    //十の位を処理するメソッド
+    //二桁の数を処理するメソッド
     static String translatedEngTen(int futaketa, int ten){
     	String result = "";
     	String resultTen = "";
@@ -88,11 +123,16 @@ public class IntToEng {
     	if(futaketa%10==0 || ten==1) result = resultTen;
     	else{//futaketa%10!=0
     		resultOne = translatedEngOne(futaketa % 10);
-    		result = resultTen + " " + resultOne;
+    		if(resultOne.equals("0")){
+    			result = resultTen;
+    		}else{
+    			result = resultTen + " " + resultOne;
+    		}
     	}
     	return result;
     }
-    //一の位を処理するメソッド
+    
+    //一桁の数を処理するメソッド
     static String translatedEngOne(int one){
     	String result = "";
     	if(one==0) result = "zero";
