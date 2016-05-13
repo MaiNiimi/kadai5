@@ -20,6 +20,11 @@ public class IntToEng {
     //何桁かを判断するメソッド
     static String translatedEng(int n){
     	String result = "";
+    	if(n/1000 == 0){
+    		int sanketa = n % 1000;
+    		int hundred = sanketa/100;
+    		result = translatedEngHundred(sanketa, hundred);
+    	}
     	if(n/100 == 0){
     		int futaketa = n % 100;
     		int ten = futaketa / 10;
@@ -28,6 +33,22 @@ public class IntToEng {
     	if(n/10 == 0) result = translatedEngOne(n%10);
     	return result;
     }
+    //百の位を処理するメソッド
+    static String translatedEngHundred(int sanketa, int hundred){
+    	String result = "";
+    	String resultHundred = "";
+    	String resultTen = "";
+    	resultHundred = translatedEngOne(hundred) + " hundred";
+    	int futaketa = sanketa % 10;
+    	if(futaketa == 0) result = resultHundred;
+    	else{
+    		int ten = futaketa/10;
+    		resultTen = translatedEngTen(sanketa % 10, ten);
+    		result = resultHundred + " " + resultTen;
+    	}
+    	return result;
+    }
+
     //十の位を処理するメソッド
     static String translatedEngTen(int futaketa, int ten){
     	String result = "";
@@ -36,23 +57,23 @@ public class IntToEng {
     	if(futaketa==10) {
     		resultTen = "ten";
     	} else if(futaketa==11) {
-    		result = "eleven";
+    		resultTen = "eleven";
     	} else if(futaketa==12) {
-    		result = "twelve";
+    		resultTen = "twelve";
     	} else if(futaketa==13) {
-    		result = "thirteen";
+    		resultTen = "thirteen";
     	} else if(futaketa==14) {
-    		result = "fourteen";
+    		resultTen = "fourteen";
     	} else if(futaketa==15) {
-    		result = "fifteen";
+    		resultTen = "fifteen";
     	} else if(futaketa==16) {
-    		result = "sixteen";
+    		resultTen = "sixteen";
     	} else if(futaketa==17) {
-    		result = "seventeen";
+    		resultTen = "seventeen";
     	} else if(futaketa==18) {
-    		result = "eighteen";
+    		resultTen = "eighteen";
     	} else if(futaketa==19) {
-    		result = "nineteen";
+    		resultTen = "nineteen";
     	}
     	else if(ten==2) resultTen = "twenty";
     	else if(ten==3) resultTen = "thirty";
@@ -62,9 +83,10 @@ public class IntToEng {
     	else if(ten==7) resultTen = "seventy";
     	else if(ten==8) resultTen = "eighty";
     	else resultTen = "ninety";
-    	//一桁の数
-    	if(futaketa%10==0) result = resultTen;
-    	else{
+    	//一の位
+    	//10,20,30,40,...
+    	if(futaketa%10==0 || ten==1) result = resultTen;
+    	else{//futaketa%10!=0
     		resultOne = translatedEngOne(futaketa % 10);
     		result = resultTen + " " + resultOne;
     	}
