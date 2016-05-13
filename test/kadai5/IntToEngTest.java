@@ -74,5 +74,54 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(110);
 		assertThat(actual, is(expected));
 	}
+	@Test
+	public void 三桁の値125を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one hundred twenty five";
+		String actual = ite.translateEng(125);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 三桁の値276を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "two hundred seventy six";
+		String actual = ite.translateEng(276);
+		assertThat(actual, is(expected));
+	}
 	
+	@Test
+	public void 四桁の値1000を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand";
+		String actual = ite.translateEng(1000);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値1006を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand six";
+		String actual = ite.translateEng(1006);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値1012を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand twelve";
+		String actual = ite.translateEng(1012);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値1100を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "one thousand one hundred";
+		String actual = ite.translateEng(1100);
+		assertThat(actual, is(expected));
+	}
+	@Test
+	public void 四桁の値6284を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "six thousand two hundred eighty four";
+		String actual = ite.translateEng(6284);
+		assertThat(actual, is(expected));
+	}
 }
