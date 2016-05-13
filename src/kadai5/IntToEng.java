@@ -23,24 +23,51 @@ public class IntToEng {
     	if(n/100 == 0){
     		int futaketa = n % 100;
     		int ten = futaketa / 10;
-    		result = translatedEngTen(ten);
+    		result = translatedEngTen(futaketa, ten);
     	}
     	if(n/10 == 0) result = translatedEngOne(n%10);
     	return result;
     }
     //十の位を処理するメソッド
-    static String translatedEngTen(int ten){
+    static String translatedEngTen(int futaketa, int ten){
     	String result = "";
-    	if(ten==0) result = "";
-    	else if(ten==1) result = "";
-    	else if(ten==2) result = "twenty";
-    	else if(ten==3) result = "thirty";
-    	else if(ten==4) result = "forty";
-    	else if(ten==5) result = "fifty";
-    	else if(ten==6) result = "sixty";
-    	else if(ten==7) result = "seventy";
-    	else if(ten==8) result = "eighty";
-    	else result = "ninety";
+    	String resultTen = "";
+    	String resultOne = "";
+    	if(futaketa==10) {
+    		resultTen = "ten";
+    	} else if(futaketa==11) {
+    		result = "eleven";
+    	} else if(futaketa==12) {
+    		result = "twelve";
+    	} else if(futaketa==13) {
+    		result = "thirteen";
+    	} else if(futaketa==14) {
+    		result = "fourteen";
+    	} else if(futaketa==15) {
+    		result = "fifteen";
+    	} else if(futaketa==16) {
+    		result = "sixteen";
+    	} else if(futaketa==17) {
+    		result = "seventeen";
+    	} else if(futaketa==18) {
+    		result = "eighteen";
+    	} else if(futaketa==19) {
+    		result = "nineteen";
+    	}
+    	else if(ten==2) resultTen = "twenty";
+    	else if(ten==3) resultTen = "thirty";
+    	else if(ten==4) resultTen = "forty";
+    	else if(ten==5) resultTen = "fifty";
+    	else if(ten==6) resultTen = "sixty";
+    	else if(ten==7) resultTen = "seventy";
+    	else if(ten==8) resultTen = "eighty";
+    	else resultTen = "ninety";
+    	//一桁の数
+    	if(futaketa%10==0) result = resultTen;
+    	else{
+    		resultOne = translatedEngOne(futaketa % 10);
+    		result = resultTen + " " + resultOne;
+    	}
     	return result;
     }
     //一の位を処理するメソッド

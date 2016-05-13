@@ -21,19 +21,12 @@ public class IntToEngTest extends IntToEng {
 		assertThat(actual, is(expected));
 	}
 
-	/*
+	
 	@Test
 	public void 二桁の値10を入力した結果が取得できる() {
 		IntToEng ite = new IntToEng();
 		String expected = "ten";
 		String actual = ite.translateEng(10);
-		assertThat(actual, is(expected));
-	}
-	@Test
-	public void 二桁の値12を入力した結果が取得できる() {
-		IntToEng ite = new IntToEng();
-		String expected = "twelve";
-		String actual = ite.translateEng(12);
 		assertThat(actual, is(expected));
 	}
 	@Test
@@ -50,5 +43,12 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(30);
 		assertThat(actual, is(expected));
 	}
-	*/
+	@Test
+	public void 二桁の値52を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "fifty two";
+		String actual = ite.translateEng(52);
+		assertThat(actual, is(expected));
+	}
+	
 }
