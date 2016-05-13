@@ -36,18 +36,32 @@ public class IntToEng {
     	}
     	return result;
     }
+
     //四桁の数を処理するメソッド
     static String translatedEngThousand(int yonketa, int thousand){
     	String result = "";
     	String resultThousand = "";
     	String resultHundred = "";
-    	resultThousand = translatedEngOne(thousand) + " thousand";
+    	String resultTen = "";
+    	
+    	if(thousand == 0) resultThousand = "";
+    	else resultThousand = translatedEngOne(thousand) + " thousand";
+
     	int sanketa = yonketa % 1000;
-    	int hundred = sanketa / 100;
     	if(sanketa == 0) result = resultThousand;
     	else{
-    		resultHundred = translatedEngHundred(sanketa, hundred);
-    		result = resultThousand + " " + resultHundred;
+    		int hundred = sanketa / 100;
+    		if(hundred == 0){
+    			resultTen = translatedEngTen(sanketa%100, sanketa/100);
+    			result = resultThousand + " " + resultTen;
+    		}else{
+    			resultHundred = translatedEngHundred(sanketa, hundred);
+    			if(resultHundred.equals("0")){
+    				result = resultThousand;
+    			}else{
+    				result = resultThousand + " " + resultHundred;
+    			}
+    		}
     	}
     	return result;
     }
@@ -70,15 +84,15 @@ public class IntToEng {
     		int ten = futaketa/10;
     		if(ten == 0){
     			resultOne = translatedEngOne(futaketa % 10);
-    			result = resultHundred + " " + resultOne;
+    			if(hundred == 0) result = resultOne;
+    			else result = resultHundred + " " + resultOne;
     		}else{
     			resultTen = translatedEngTen(futaketa, ten);
     			if(resultTen.equals("0")){
-        			result = resultHundred;
-        		}else{
-        			result = resultHundred + " " + resultTen;
-        		}
-    			result = resultHundred + " " + resultTen;
+    				result = resultHundred;
+    			}else{
+    				result = resultHundred + " " + resultTen;
+    			}
     		}
     	}
     	return result;
@@ -110,6 +124,7 @@ public class IntToEng {
     	} else if(futaketa==19) {
     		resultTen = "nineteen";
     	}
+    	else if(ten==0) resultTen = "";
     	else if(ten==2) resultTen = "twenty";
     	else if(ten==3) resultTen = "thirty";
     	else if(ten==4) resultTen = "forty";

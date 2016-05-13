@@ -103,6 +103,7 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(1006);
 		assertThat(actual, is(expected));
 	}
+	/*
 	@Test
 	public void 四桁の値1012を入力した結果が取得できる() {
 		IntToEng ite = new IntToEng();
@@ -124,4 +125,5 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(6284);
 		assertThat(actual, is(expected));
 	}
+	*/
 }
