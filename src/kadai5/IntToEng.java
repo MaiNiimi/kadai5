@@ -8,7 +8,7 @@ public class IntToEng {
 
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
-
+ 
         System.out.println(translateEng(input));
 
     }
@@ -20,19 +20,22 @@ public class IntToEng {
     //何桁かを判断するメソッド
     static String translatedEng(int n){
     	String result = "";
-    	if(n/10 == 0) result = translatedEngOne(n%10);
-    	else if(n/100 == 0){
+    	if(n/10 == 0){//nが一桁だったら
+    		result = translatedEngOne(n%10);
+    	}else if(n/100 == 0){//nが二桁だったら
     		int futaketa = n % 100;
     		int ten = futaketa / 10;
     		result = translatedEngTen(futaketa, ten);
-    	}else if(n/1000 == 0){
+    	}else if(n/1000 == 0){//nが三桁だったら
     		int sanketa = n % 1000;
     		int hundred = sanketa/100;
     		result = translatedEngHundred(sanketa, hundred);
-    	}else if(n/10000 == 0){
+    	}else if(n/10000 == 0){//nが四桁だったら
     		int yonketa = n % 10000;
     		int thousand = yonketa/1000;
     		result = translatedEngThousand(yonketa, thousand);
+    	}else if(n == 10000){
+    		result = "ten thousand";
     	}
     	return result;
     }
@@ -106,6 +109,7 @@ public class IntToEng {
     	String result = "";
     	String resultTen = "";
     	String resultOne = "";
+
     	if(futaketa==10) {
     		resultTen = "ten";
     	} else if(futaketa==11) {
@@ -138,7 +142,7 @@ public class IntToEng {
     	else resultTen = "ninety";
     	//一の位
     	//10,20,30,40,...
-    	if(futaketa%10==0 || ten==1){
+    	if(futaketa%10==0 || ten==1){//10,11,12,13,...と20,30,40,...
     		result = resultTen;
     	} else {//一の位が0でない、21以上の数
     		resultOne = translatedEngOne(futaketa % 10);

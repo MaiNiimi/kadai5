@@ -149,4 +149,11 @@ public class IntToEngTest extends IntToEng {
 		String actual = ite.translateEng(6284);
 		assertThat(actual, is(expected));
 	}
+	@Test
+	public void 五桁の値10000を入力した結果が取得できる() {
+		IntToEng ite = new IntToEng();
+		String expected = "ten thousand";
+		String actual = ite.translateEng(10000);
+		assertThat(actual, is(expected));
+	}
 }
